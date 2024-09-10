@@ -13,7 +13,7 @@ from torch.utils.data import DataLoader, TensorDataset
 
 MODEL_NAME = 'vit' # options {'ResNet50', 'vit'}
 FINAL_LAYER = 'Static' # options {'Static', 'Dynamic'}
-BASE_RBACA_EVAL = 'B' # 'C' rbaca or 'B' base or 'E' eval
+BASE_RBACA_EVAL = 'B' # 'R' rbaca or 'B' base or 'E' eval
 
 
 if MODEL_NAME == 'vit':

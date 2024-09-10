@@ -14,7 +14,7 @@ import os
 
 N_EPOCHS = 10
 
-BASE_RBACA_EVAL = 'B'
+BASE_RBACA_EVAL = 'B' # 'R' rbaca or 'B' base or 'E' eval
 MODEL_NAME = 'vit' # options {'ResNet50', 'vit'}
     
 # Load the YAML file

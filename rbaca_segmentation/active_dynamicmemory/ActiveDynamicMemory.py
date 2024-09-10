@@ -18,9 +18,9 @@ import warnings
 # Suppress all warnings
 warnings.filterwarnings("ignore")
 
-DYNAMIC_M_ALLOCATION = False
+DYNAMIC_MM_ALLOCATION = False
 INITIAL_SIZE = 1
-SMART_CUT = 'EGL' # {'None', 'KMeans', 'Uncertainty', 'KU_A', 'EGL', 'DBScan', 'GMM', 'EGL_GMM'}
+PRUNING = 'EGL' # {'None', 'KMeans', 'Uncertainty', 'KU_A', 'EGL', 'DBScan', 'GMM', 'EGL_GMM'}
 
 AL_UNCERTAINTY = False
 UNCERTAINTY_THRESHOLD = 0.025
@@ -203,7 +203,7 @@ class RBACADynamicMemory(DynamicMemory):
 #                 print('self.domainMetric[new_domain_label]')
 #                 print(self.domainMetric[new_domain_label])
                 
-                if not DYNAMIC_M_ALLOCATION or new_domain_label + 1 <= INITIAL_SIZE:
+                if not DYNAMIC_MM_ALLOCATION or new_domain_label + 1 <= INITIAL_SIZE:
                     self.max_per_domain = int(self.memorymaximum/(new_domain_label+1))
                 else:
                     self.memorymaximum += self.max_per_domain
@@ -1220,7 +1220,7 @@ class RBACADynamicMemory(DynamicMemory):
             if domain_count>self.max_per_domain:
                 todelete = domain_count-self.max_per_domain
                 
-                if SMART_CUT == 'None':
+                if PRUNING == 'None':
                     for item in self.memorylist:
                         if todelete>0:
                             if item.pseudo_domain==k:
@@ -1239,21 +1239,21 @@ class RBACADynamicMemory(DynamicMemory):
                     
                     domain_items_valid_labels = np.array([item.target for item in domain_items_valid]     )
                     
-                    if SMART_CUT == 'KMeans':
+                    if PRUNING == 'KMeans':
                         domain_items_selected_data, _ = self.dataset_distillation_k_means(domain_items_valid_data, domain_items_valid_labels, len(domain_items_valid) - todelete)
-                    elif SMART_CUT == 'Uncertainty':
+                    elif PRUNING == 'Uncertainty':
                         domain_items_selected_data, _ = self.dataset_distillation_uncertainty(domain_items_valid_data, domain_items_valid_labels, len(domain_items_valid) - todelete, model)
-                    elif SMART_CUT == 'EGL':
+                    elif PRUNING == 'EGL':
                         domain_items_selected_data, _ = self.dataset_distillation_egl(domain_items_valid_data, domain_items_valid_labels, len(domain_items_valid) - todelete, model)
-                    elif SMART_CUT == 'KU_A':
+                    elif PRUNING == 'KU_A':
                         domain_items_selected_data, _ = self.dataset_distillation_k_means_uncertainty_a(domain_items_valid_data, domain_items_valid_labels, len(domain_items_valid) - todelete, model)
-                    elif SMART_CUT == 'DBScan':
+                    elif PRUNING == 'DBScan':
                         domain_items_selected_data, _ = self.dataset_distillation_db_scan(domain_items_valid_data, domain_items_valid_labels, len(domain_items_valid) - todelete)
-                    elif SMART_CUT == 'KU_B':
+                    elif PRUNING == 'KU_B':
                         domain_items_selected_data, _ = self.dataset_distillation_k_means_uncertainty_b(domain_items_valid_data, domain_items_valid_labels, len(domain_items_valid) - todelete, model)
-                    elif SMART_CUT == 'GMM':
+                    elif PRUNING == 'GMM':
                         domain_items_selected_data, _ = self.dataset_distillation_gmm(domain_items_valid_data, domain_items_valid_labels, len(domain_items_valid) - todelete)
-                    elif SMART_CUT == 'EGL_GMM':
+                    elif PRUNING == 'EGL_GMM':
                         domain_items_selected_data, _ = self.dataset_distillation_eglgmm(domain_items_valid_data, domain_items_valid_labels, len(domain_items_valid) - todelete, model)
                     else:
                         print('ERROR! Invalid Smart Cut')

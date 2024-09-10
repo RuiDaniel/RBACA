@@ -20,7 +20,7 @@ import matplotlib.pyplot as plt
 
 MODEL_NAME = 'vit' # options {'ResNet50', 'vit'}
 FINAL_LAYER = 'Static' # options {'Static', 'Dynamic'}
-BASE_RBACA_EVAL = 'B' # 'C' rbaca or 'B' base or 'E' eval
+BASE_RBACA_EVAL = 'B' # 'R' rbaca or 'B' base or 'E' eval
 DATA_AUG = False
 
 if BASE_RBACA_EVAL == 'E':
@@ -67,7 +67,7 @@ def classes_observed_mapping_fill(new):
         
 INIT_SIZE_DYNAMIC = 1
 
-if BASE_RBACA_EVAL == 'C' and FINAL_LAYER == 'Dynamic':
+if BASE_RBACA_EVAL == 'R' and FINAL_LAYER == 'Dynamic':
     INIT_SIZE_DYNAMIC = len([x for x in BASE_MAPPING if x >= 0])
     classes_observed = set([i for i, x in enumerate(BASE_MAPPING) if x >= 0])
     classes_observed_mapping_fill(BASE_MAPPING)

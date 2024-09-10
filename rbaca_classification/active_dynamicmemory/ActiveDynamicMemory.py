@@ -19,11 +19,11 @@ import torch.nn as nn
 
 MODEL_NAME = 'ResNet50' # options {'ResNet50', 'vit'}
 FINAL_LAYER = 'Dynamic'  # options {'Static', 'Dynamic'}
-BASE_RBACA_EVAL = 'B'
+BASE_RBACA_EVAL = 'B' # 'R' rbaca or 'B' base or 'E' eval
 
-DYNAMIC_M_ALLOCATION = False
+DYNAMIC_MM_ALLOCATION = False
 INITIAL_SIZE = 1
-SMART_CUT = 'None' # {'None', 'KMeans', 'Uncertainty', 'KU_A', 'DBScan', 'GMM'}
+PRUNING = 'None' # {'None', 'KMeans', 'Uncertainty', 'KU_A', 'DBScan', 'GMM'}
 
 AL_UNCERTAINTY = False
 UNCERTAINTY_THRESHOLD = 0.1
@@ -47,7 +47,7 @@ def classes_observed_mapping_fill(new):
     for i in range(N_CLASSES):
         classes_observed_mapping[i] = new[i]
         
-if BASE_RBACA_EVAL == 'C' and FINAL_LAYER == 'Dynamic':
+if BASE_RBACA_EVAL == 'R' and FINAL_LAYER == 'Dynamic':
     INIT_SIZE_DYNAMIC = len([x for x in BASE_MAPPING if x >= 0])
     classes_observed = set([i for i, x in enumerate(BASE_MAPPING) if x >= 0])
     classes_observed_mapping_fill(BASE_MAPPING)
@@ -233,7 +233,7 @@ class RBACADynamicMemory(DynamicMemory):
 #                 print('self.domainMetric[new_domain_label]')
 #                 print(self.domainMetric[new_domain_label])
                 
-                if not DYNAMIC_M_ALLOCATION or new_domain_label + 1 <= INITIAL_SIZE:
+                if not DYNAMIC_MM_ALLOCATION or new_domain_label + 1 <= INITIAL_SIZE:
                     self.max_per_domain = int(self.memorymaximum/(new_domain_label+1))
                 else:
                     self.memorymaximum += self.max_per_domain
@@ -882,7 +882,7 @@ class RBACADynamicMemory(DynamicMemory):
             if domain_count>self.max_per_domain:
                 todelete = domain_count-self.max_per_domain
                 
-                if SMART_CUT == 'None':
+                if PRUNING == 'None':
                     for item in self.memorylist:
                         if todelete>0:
                             if item.pseudo_domain==k:
@@ -901,15 +901,15 @@ class RBACADynamicMemory(DynamicMemory):
                     
                     domain_items_valid_labels = np.array([item.target for item in domain_items_valid]     )
                     
-                    if SMART_CUT == 'KMeans':
+                    if PRUNING == 'KMeans':
                         domain_items_selected_data, _ = self.dataset_distillation_k_means(domain_items_valid_data, domain_items_valid_labels, len(domain_items_valid) - todelete)
-                    elif SMART_CUT == 'Uncertainty':
+                    elif PRUNING == 'Uncertainty':
                         domain_items_selected_data, _ = self.dataset_distillation_uncertainty(domain_items_valid_data, domain_items_valid_labels, len(domain_items_valid) - todelete, model)
-                    elif SMART_CUT == 'KU_A':
+                    elif PRUNING == 'KU_A':
                         domain_items_selected_data, _ = self.dataset_distillation_k_means_uncertainty_a(domain_items_valid_data, domain_items_valid_labels, len(domain_items_valid) - todelete, model)
-                    elif SMART_CUT == 'DBScan':
+                    elif PRUNING == 'DBScan':
                         domain_items_selected_data, _ = self.dataset_distillation_db_scan(domain_items_valid_data, domain_items_valid_labels, len(domain_items_valid) - todelete)
-                    elif SMART_CUT == 'GMM':
+                    elif PRUNING == 'GMM':
                         domain_items_selected_data, _ = self.dataset_distillation_gmm(domain_items_valid_data, domain_items_valid_labels, len(domain_items_valid) - todelete)
                     else:
                         print('ERROR! Invalid Smart Cut')

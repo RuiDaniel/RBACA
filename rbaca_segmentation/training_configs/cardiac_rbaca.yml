@@ -7,7 +7,7 @@ settings:
 trainparams:
     method: 'RBACA'
     startbudget: 430
-    memorymaximum: 485
+    memorymaximum: 200
     outlier_distance: 0.025 # 0.08
     continuous: True
     use_memory: True

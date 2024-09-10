@@ -20,7 +20,7 @@ warnings.filterwarnings("ignore")
 
 DYNAMIC_MM_ALLOCATION = False
 INITIAL_SIZE = 1
-PRUNING = 'EGL' # {'None', 'KMeans', 'Uncertainty', 'KU_A', 'EGL', 'DBScan', 'GMM', 'EGL_GMM'}
+PRUNING = 'None' # {'None', 'KMeans', 'Uncertainty', 'KU_A', 'EGL', 'DBScan', 'GMM', 'EGL_GMM'}
 
 AL_UNCERTAINTY = False
 UNCERTAINTY_THRESHOLD = 0.025

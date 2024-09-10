@@ -66,7 +66,7 @@ class ActiveDynamicMemoryModel(pl.LightningModule, ABC):
 
         
 
-        elif self.mparams.method == 'RBACA':
+        if self.mparams.method == 'RBACA':
             self.trainingsmemory = RBACADynamicMemory(initelements=initelements, 
                                                       memorymaximum=self.mparams.memorymaximum,
                                                       seed=self.mparams.seed,

@@ -13,5 +13,5 @@ df_selected = df_overview[['Siemens', 'GE', 'Philips', 'Canon', 'BWT', 'FWT', 'd
 print('df_selected')
 print(df_selected)
 
-df_selected.to_csv('results.csv', index=False)
+df_selected.to_csv(`results.csv`, index=False)
 

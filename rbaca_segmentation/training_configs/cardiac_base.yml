@@ -1,0 +1,22 @@
+settings:
+    LOGGING_DIR: 'log/tensorboard_logs/'
+    TRAINED_MODELS_DIR: 'output/trained_models/'
+    TRAINED_MEMORY_DIR: 'output/trained_memory/'
+    RESULT_DIR: 'output/results/'
+
+trainparams:
+    continuous: False
+    use_memory: False
+    datasetfile: '../../Data/MM_cardiac_pre_processed/cardiacdatasetsplit.csv'
+    batch_size: 8
+    task: 'cardiac'
+    noncontinuous_steps: 5000
+    noncontinuous_train_splits: ['base']
+    order: ['Siemens', 'GE', 'Philips', 'Canon']
+    scanner: null
+    base_model: null
+    run_postfix: 1
+    val_check_interval: 50
+    droprate: 0.25
+    learning_rate: 0.001
+    gradient_clip_val: 0

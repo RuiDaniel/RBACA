@@ -1,0 +1,33 @@
+settings:
+    LOGGING_DIR: 'log/tensorboard_logs/'
+    TRAINED_MODELS_DIR: 'output/trained_models/'
+    TRAINED_MEMORY_DIR: 'output/trained_memory/'
+    RESULT_DIR: 'output/results/'
+
+trainparams:
+    method: 'RBACA'
+    startbudget: 430
+    memorymaximum: 128
+    outlier_distance: 0.025 # 0.08
+    continuous: True
+    use_memory: True
+    random_cache: True
+    transformgrams: True
+    datasetfile: '../../Data/MM_cardiac_pre_processed/cardiacdatasetsplit.csv'
+    transition_phase_after: 0.8
+    batch_size: 4
+    training_batch_size: 8
+    task: 'cardiac'
+    order: ['Siemens', 'GE', 'Philips', 'Canon']
+    scanner: null
+    base_model: 'cardiac_batch_cardiacdatasetsplit_base_1_d885e299cf.pt'
+    run_postfix: 1
+    val_check_interval: 10
+    completion_limit: 0.75
+    droprate: 0.25
+    learning_rate: 0.0001
+    gradient_clip_val: 0.5
+    allowedlabelratio: 0
+    len_perf_queue: 8
+    dim: 2
+    seed: 1

@@ -17,5 +17,5 @@ df_selected = df_selected.rename(columns={'Siemens': 'F1 Siemens', 'GE': 'F1 GE'
 print('df_selected')
 print(df_selected)
 
-df_selected.to_csv('results.csv', index=False)
+df_selected.to_csv(`results.csv`, index=False)
 

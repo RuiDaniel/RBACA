@@ -10,8 +10,8 @@ from torch.utils.data import DataLoader, TensorDataset
 import cv2
 import matplotlib.pyplot as plt
 
-MODEL_NAME = 'vit' # options {'ResNet50', 'vit'}
-FINAL_LAYER = 'Static' # options {'Static', 'Dynamic'}
+MODEL_NAME = 'ResNet50' # options {'ResNet50', 'vit'}
+FINAL_LAYER = 'Dynamic' # options {'Static', 'Dynamic'}
 BASE_RBACA_EVAL = 'B' # 'R' rbaca or 'B' base or 'E' eval
 
 

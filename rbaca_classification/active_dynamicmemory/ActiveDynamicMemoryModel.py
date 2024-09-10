@@ -15,7 +15,7 @@ import random
 import yaml
 import torchvision.transforms.functional as TF
 
-MODEL_NAME = 'vit' # options {'ResNet50', 'vit'}
+MODEL_NAME = 'ResNet50' # options {'ResNet50', 'vit'}
 BASE_RBACA_EVAL = 'B' # 'R' rbaca or 'B' base or 'E' eval
 DATA_AUG = False
 

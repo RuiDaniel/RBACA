@@ -16,19 +16,13 @@ where `<download_path>` is the directory where the M&Ms dataset was downloaded t
 
 **3. Training**
 
-To run the training the config files in `training_configs/` are used. 
+To run the training, the config files in `training_configs/` are used. 
 
-`python run_training.py --config training_configs/cardiac_base.yml`. Then, change the trained_model name to `cardiac_batch_cardiacdatasetsplit_base_1_d885e299cf.pt`
+Run base training: `python run_training.py --config training_configs/cardiac_base.yml`. Then, change the trained_model name to `cardiac_batch_cardiacdatasetsplit_base_1_d885e299cf.pt`.
 
-`python run_training.py --config training_configs/cardiac_rbaca.yml`. Then, change the `cardiac..._tf08_XXX_shift_Canon.pt`,`cardiac..._tf08_XXX_shift_GE.pt` and `cardiac..._tf08_XXX_shift_Philips.pt` with XXX equal to YYY in generated `cardiac_cont_cardiacdatasetsplit_basemodel_batch_memory_tf08_YYY.pt`
+Run RBACA: `python run_training.py --config training_configs/cardiac_rbaca.yml`. Then, change `cardiac..._tf08_XXX_shift_Canon.pt`,`cardiac..._tf08_XXX_shift_GE.pt` and `cardiac..._tf08_XXX_shift_Philips.pt` with XXX equal to YYY in generated `cardiac_cont_cardiacdatasetsplit_basemodel_batch_memory_tf08_YYY.pt`.
 
-Finally, run evaluation:
-
-`python cardiac_eval.py`
-
-To change the seeds evaluated edit cardiac_eval.py
-
-The results will appear as 'results.csv'
+Finally, to perform evaluation, run `python cardiac_eval.py`. To change the seeds evaluated edit `cardiac_eval.py` The results will appear as `results.csv`.
 
 **README.md and Code**
 

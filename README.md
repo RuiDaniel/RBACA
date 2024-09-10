@@ -19,12 +19,10 @@ where `<download_path>` is the directory where the M&Ms dataset was downloaded t
 To run the training the config files in `training_configs/` are used. 
 
 To run the base training, change to `BASE_RBACA_EVAL = 'B'` everywhere (in rbaca_classifiation) and run:
-`python run_training.py --config training_configs/cardiac_base.yml`
-then change the trained_model name to "cardiac_batch_cardiacdatasetsplit_base_1_d885e299cf.pt"
+`python run_training.py --config training_configs/cardiac_base.yml`. Then, change the trained_model name to `cardiac_batch_cardiacdatasetsplit_base_1_d885e299cf.pt`
 
 To run RBACA, change to `BASE_RBACA_EVAL = 'R'` everywhere (in rbaca_classifiation) and run:
-`python run_training.py --config training_configs/cardiac_rbaca.yml`
-then change the "cardiac..._tf08_XXX_shift_Canon.pt","cardiac..._tf08_XXX_shift_GE.pt" and "cardiac..._tf08_XXX_shift_Philips.pt" with XXX equal to YYY in generated "cardiac_cont_cardiacdatasetsplit_basemodel_batch_memory_tf08_YYY.pt"
+`python run_training.py --config training_configs/cardiac_rbaca.yml`. Then, change the `cardiac..._tf08_XXX_shift_Canon.pt`,`cardiac..._tf08_XXX_shift_GE.pt` and `cardiac..._tf08_XXX_shift_Philips.pt` with XXX equal to YYY in generated `cardiac_cont_cardiacdatasetsplit_basemodel_batch_memory_tf08_YYY.pt`
 
 Finally, to run evaluation, change to `BASE_RBACA_EVAL = 'E'` everywhere (in rbaca_classifiation) and run:
 `python cardiac_eval.py`
